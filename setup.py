@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 PACKAGE_NAME = "lintreview"
 VERSION = "0.5.1"
 
-requirements = open('./requirements.txt', 'r')
+requirements = open('./requirements-project.txt', 'r')
 
 setup(
     name=PACKAGE_NAME,
