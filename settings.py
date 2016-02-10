@@ -8,7 +8,9 @@ def env(key, default, cast=str):
 #########################
 
 # gunicorn config
-bind = env('LINTREVIEW_GUNICORN_BIND', '127.0.0.1:5000')
+bind = env('LINTREVIEW_GUNICORN_BIND', '0.0.0.0:')
+port = env('PORT', '5000')
+bind += port
 errorlog = env('LINTREVIEW_GUNICORN_LOG_ERROR',
                           'lintreview.error.log')
 accesslog = env('LINTREVIEW_GUNICORN_LOG_ACCESS',
