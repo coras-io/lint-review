@@ -41,7 +41,7 @@ BROKER_URL = 'amqp://'+''.join([
     env('LINTREVIEW_MQ_VIRTUAL_HOST', '/')
 ])
 
-BROKER_URL = env('RABBITMQ_BIGWIG_URL')
+BROKER_URL = env('RABBITMQ_BIGWIG_URL', '')
 
 # Use json for serializing messages.
 CELERY_TASK_SERIALIZER = 'json'

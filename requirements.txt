@@ -1,3 +1,4 @@
+cryptography
 Flask==0.10.1
 github3.py==1.0.0a2
 nose==1.2.1
