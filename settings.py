@@ -9,7 +9,7 @@ def env(key, default, cast=str):
 
 # gunicorn config
 # bind = env('LINTREVIEW_GUNICORN_BIND', '0.0.0.0:')
-# port = env('PORT', '5000')
+port = env('PORT', '5000')
 # bind += port
 # errorlog = env('LINTREVIEW_GUNICORN_LOG_ERROR',
 #                           'lintreview.error.log')
@@ -21,7 +21,7 @@ def env(key, default, cast=str):
 # Basic flask config
 DEBUG = env('LINTREVIEW_FLASK_DEBUG', False, bool)
 TESTING = env('LINTREVIEW_TESTING', False, bool)
-# SERVER_NAME = env('LINTREVIEW_SERVER_NAME', '0.0.0.0:%s' % port)
+SERVER_NAME = env('LINTREVIEW_SERVER_NAME', '0.0.0.0:%s' % port)
 
 # Config file for logging
 LOGGING_CONFIG = './logging.ini'
