@@ -35,14 +35,15 @@ def start_review():
         head_repo_url = pull_request["head"]["repo"]["git_url"]
         user = pull_request["base"]["repo"]["owner"]["login"]
         repo = pull_request["base"]["repo"]["name"]
+        ref = pull_request["head"]["ref"]
     except Exception as e:
         log.error("Got an invalid JSON body. '%s'", e)
         return Response(status=403,
                         response="You must provide a valid JSON body\n")
 
     log.info("Received GitHub pull request notification for "
-             "%s %s, (%s) from: %s",
-             base_repo_url, number, action, head_repo_url)
+             "%s %s, (%s) from: %s - %s",
+             base_repo_url, number, action, head_repo_url, ref)
 
     if action not in ("opened", "synchronize", "reopened", "closed"):
         log.info("Ignored '%s' action." % action)
@@ -53,7 +54,7 @@ def start_review():
 
     gh = get_repository(app.config, user, repo)
     try:
-        lintrc = get_lintrc(gh)
+        lintrc = get_lintrc(gh, ref)
         log.debug("lintrc file contents '%s'", lintrc)
     except Exception as e:
         log.warn("Cannot download .lintrc file for '%s', "
