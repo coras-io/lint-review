@@ -9,7 +9,10 @@ from lintreview.web import app
 def main():
     parser = create_parser()
     args = parser.parse_args()
-    args.func(args)
+    if hasattr(args, 'func'):
+        args.func(args)
+    else:
+        parser.print_help()
 
 
 def register_hook(args):

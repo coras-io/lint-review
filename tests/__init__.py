@@ -12,8 +12,8 @@ def load_fixture(filename):
 
 
 def create_pull_files(data):
-    return map(lambda f: PullFile(f), json.loads(data))
+    return [PullFile(f) for f in json.loads(data)]
 
 
 def create_commits(data):
-    return map(lambda f: RepoCommit(f), json.loads(data))
+    return [RepoCommit(f) for f in json.loads(data)]
