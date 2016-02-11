@@ -107,4 +107,4 @@ OK_COMMENT = env('LINTREVIEW_OK_COMMENT',
 # Enable to apply a label when updating build status.
 # Pull requests that fail will have the label removed.
 # Customize the label name when label statuses are enabled.
-OK_LABEL = env('LINTREVIEW_OK_LABEL', 'No lint errors')
+# OK_LABEL = env('LINTREVIEW_OK_LABEL', 'No lint errors')
