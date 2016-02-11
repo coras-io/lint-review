@@ -108,3 +108,6 @@ OK_COMMENT = env('LINTREVIEW_OK_COMMENT',
 # Pull requests that fail will have the label removed.
 # Customize the label name when label statuses are enabled.
 # OK_LABEL = env('LINTREVIEW_OK_LABEL', 'No lint errors')
+
+CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']

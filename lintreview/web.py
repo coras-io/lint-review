@@ -54,7 +54,7 @@ def start_review():
 
     gh = get_repository(app.config, user, repo)
     try:
-        lintrc = get_lintrc(gh, ref)
+        lintrc = get_lintrc(gh, ref).decode('utf-8')
         log.debug("lintrc file contents '%s'", lintrc)
     except Exception as e:
         log.warn("Cannot download .lintrc file for '%s', "
