@@ -114,7 +114,7 @@ class Tool(object):
                 else:
                     lines = [int(line)]
                 add = lambda x: self.problems.add(filename, x, message)
-                map(add, lines)
+                list(map(add, lines))
 
     def apply_base(self, value):
         """

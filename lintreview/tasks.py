@@ -57,7 +57,7 @@ def process_pull_request(user, repo, number, lintrc):
 
         log.info('Completed lint processing for %s/%s/%s' % (
             user, repo, number))
-    except BaseException, e:
+    except BaseException as e:
         log.exception(e)
 
 

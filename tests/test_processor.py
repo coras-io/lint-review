@@ -17,9 +17,7 @@ class ProcessorTest(TestCase):
         gh = Mock()
         pull_request = Mock()
 
-        pull_request.files.return_value = map(
-            lambda f: PullFile(f),
-            json.loads(fixture))
+        pull_request.files.return_value = [PullFile(f) for f in json.loads(fixture)]
 
         gh.pull_request.return_value = pull_request
         return gh

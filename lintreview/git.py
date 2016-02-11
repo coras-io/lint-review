@@ -2,7 +2,7 @@ import os
 import logging
 import shutil
 import subprocess
-from urlparse import urlparse, urlunparse
+from urllib.parse import urlparse, urlunparse
 
 log = logging.getLogger(__name__)
 
