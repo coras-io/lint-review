@@ -36,7 +36,7 @@ class TestFlake8(TestCase):
         expected = Comment(fname, 2, 2, "F401 're' imported but unused")
         eq_(expected, problems[1])
 
-        expected = Comment(fname, 11, 11, "W603 '<>' is deprecated, use '!='")
+        expected = Comment(fname, 11, 11, "E713 test for membership should be 'not in'")
         eq_(expected, problems[7])
 
     def test_process_files_two_files(self):
@@ -51,12 +51,13 @@ class TestFlake8(TestCase):
         expected = Comment(fname, 2, 2, "F401 're' imported but unused")
         eq_(expected, problems[1])
 
-        expected = Comment(fname, 11, 11, "W603 '<>' is deprecated, use '!='")
+        expected = Comment(
+            fname, 11, 11, "E713 test for membership should be 'not in'")
         eq_(expected, problems[7])
 
     def test_config_options_and_process_file(self):
         options = {
-            'ignore': 'F4,W603'
+            'ignore': 'F4,E713'
         }
         self.tool = Flake8(self.problems, options)
         self.tool.process_files([self.fixtures[1]])

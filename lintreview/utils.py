@@ -50,7 +50,7 @@ def bundle_exists(name):
     @return boolean
     """
     try:
-        installed = subprocess.check_output(['bundle', 'list'])
+        installed = subprocess.check_output(['bundle', 'list']).decode('utf-8')
     except subprocess.CalledProcessError or OSError:
         return False
     return name in installed

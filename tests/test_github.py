@@ -22,8 +22,8 @@ def test_get_client():
 
 def test_get_lintrc():
     repo = Mock(spec=github3.repos.repo.Repository)
-    github.get_lintrc(repo)
-    repo.file_contents.assert_called_with('.lintrc')
+    github.get_lintrc(repo, 'master')
+    repo.file_contents.assert_called_with('.lintrc', 'master')
 
 
 def test_register_hook():

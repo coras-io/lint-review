@@ -36,7 +36,7 @@ class TestPep8(TestCase):
         expected = Comment(fname, 2, 2, 'E401 multiple imports on one line')
         eq_(expected, problems[0])
 
-        expected = Comment(fname, 11, 11, "W603 '<>' is deprecated, use '!='")
+        expected = Comment(fname, 11, 11, "E713 test for membership should be 'not in'")
         eq_(expected, problems[5])
 
     def test_process_files_two_files(self):
@@ -46,15 +46,18 @@ class TestPep8(TestCase):
 
         problems = self.problems.all(self.fixtures[1])
         eq_(6, len(problems))
-        expected = Comment(self.fixtures[1], 2, 2, 'E401 multiple imports on one line')
+        expected = Comment(
+            self.fixtures[1], 2, 2, 'E401 multiple imports on one line')
         eq_(expected, problems[0])
 
-        expected = Comment(self.fixtures[1], 11, 11, "W603 '<>' is deprecated, use '!='")
+        expected = Comment(
+            self.fixtures[1],
+            11, 11, "E713 test for membership should be 'not in'")
         eq_(expected, problems[5])
 
     def test_config_options_and_process_file(self):
         options = {
-            'ignore': 'E2,W603'
+            'ignore': 'E2,E713'
         }
         self.tool = Pep8(self.problems, options)
         self.tool.process_files([self.fixtures[1]])
@@ -62,4 +65,4 @@ class TestPep8(TestCase):
         eq_(4, len(problems))
         for p in problems:
             self.assertFalse('E2' in p.body)
-            self.assertFalse('W603' in p.body)
+            self.assertFalse('E713' in p.body)

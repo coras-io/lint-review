@@ -8,5 +8,5 @@ def thing(self):
 
 def thing_two(arg1, arg2):
     result=arg1*arg2
-    if result != arg1:
+    if not result in arg1:
         print('derp')
