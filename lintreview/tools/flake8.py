@@ -55,7 +55,12 @@ class Flake8(Tool):
             return False
 
         for line in output:
-            filename, line, error = self._parse_line(line)
+            try:
+                filename, line, error = self._parse_line(line)
+            except ValueError:
+                log.warning('Unable to process flake8 output "%s"', line)
+                continue
+
             self.problems.add(filename, line, error)
 
     def _parse_line(self, line):
@@ -64,7 +69,9 @@ class Flake8(Tool):
         Parse the output for real data.
         """
         parts = line.split(':', 3)
-        if len(parts) == 3:
+        if len(parts) < 3:
+            raise ValueError()
+        elif len(parts) == 3:
             message = parts[2].strip()
         else:
             message = parts[3].strip()
