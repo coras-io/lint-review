@@ -21,6 +21,7 @@ class Flake8(Tool):
         'format',
         'max-complexity',
         'snippet',
+        'per-file-ignores',
     ]
 
     def check_dependencies(self):
@@ -40,6 +41,10 @@ class Flake8(Tool):
         Only a single process is made for all files
         to save resources.
         """
+        # Use relative paths to allow options like '--per-file-ignores' to
+        # work. We'll use the 'cwd' arg when running the flake8 subprocess to
+        # ensure these relative paths resolve correctly.
+        files = [os.path.relpath(f, self.base_path) for f in files]
         log.debug('Processing %s files with %s', files, self.name)
         command = ['flake8']
         for option in self.PYFLAKE_OPTIONS:
@@ -49,7 +54,8 @@ class Flake8(Tool):
                      self.options.get(option)])
 
         command += files
-        output = run_command(command, split=True, ignore_error=True)
+        output = run_command(command, split=True, ignore_error=True,
+                             cwd=self.base_path)
         if not output:
             log.debug('No flake8 errors found.')
             return False

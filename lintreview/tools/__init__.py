@@ -135,7 +135,8 @@ def run_command(
         command,
         split=False,
         ignore_error=False,
-        include_errors=True):
+        include_errors=True,
+        cwd=None):
     """
     Execute subprocesses.
     """
@@ -155,7 +156,8 @@ def run_command(
         stderr=error_pipe,
         shell=False,
         universal_newlines=True,
-        env=env)
+        env=env,
+        cwd=cwd)
     if split:
         data = process.stdout.readlines()
     else:
