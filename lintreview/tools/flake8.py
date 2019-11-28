@@ -67,6 +67,10 @@ class Flake8(Tool):
                 log.warning('Unable to process flake8 output "%s"', line)
                 continue
 
+            # The caller is expecting full file paths so add the base path
+            # back in.
+            if filename:
+                filename = os.path.join(self.base_path, filename)
             self.problems.add(filename, line, error)
 
     def _parse_line(self, line):
